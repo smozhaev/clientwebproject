@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import logo from "./logo.svg";
 import "./App.css";
+import { Table } from 'antd';
+import { ColumnsType } from "antd/es/table";
 
 function App() {
   // const getStaff = async () => {
@@ -13,22 +14,83 @@ function App() {
   // useEffect(() => {
   //   console.log(getStaff());
   // });
+  interface DataType {
+    key: string;
+    name: string;
+    age: number;
+    address: string;
+    email: string;
+    username: string;
+  }
 
+  const dataSource: DataType[] = [
+    {
+      key: '1',
+      name: 'Mike',
+      age: 32,
+      address: '10 Downing Street',
+      email: 'mike@mail.ru',
+      username: 'MegaGigsDragonSlayer69',
+    },
+    {
+      key: '2',
+      name: 'John',
+      age: 42,
+      address: '10 Downing Street',
+      email: 'jhon@mail.ru',
+      username: 'MegaGigsDragonSlayer70',
+    },
+    {
+      key: '2',
+      name: 'Don',
+      age: 42,
+      address: '10 Downing Street',
+      email: 'djero@mail.ru',
+      username: 'MegaGigsDragonSlayer71',
+    },
+    {
+      key: '2',
+      name: 'Bob',
+      age: 42,
+      address: '10 Downing Street',
+      email: 'adww@mail.ru',
+      username: 'MegaGigsDragonSlayer72',
+    },
+  ];
+  
+  const columns: ColumnsType<DataType> = [
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
+    },
+    {
+      title: 'Age',
+      dataIndex: 'age',
+      key: 'age',
+    },
+    {
+      title: 'Address',
+      dataIndex: 'address',
+      key: 'address',
+    },
+    {
+      title: 'Email',
+      dataIndex: 'email',
+      key: 'email',
+    },
+    {
+      title: 'Username',
+      dataIndex: 'username',
+      key: 'username',
+    }
+  ];
+  
+  
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Table dataSource={dataSource} columns={columns} />
       </header>
     </div>
   );
