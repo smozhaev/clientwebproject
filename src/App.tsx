@@ -1,99 +1,60 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
-import { Table } from 'antd';
+import { Table, Button } from 'antd';
 import { ColumnsType } from "antd/es/table";
+import axios from "axios";
 
 function App() {
-  // const getStaff = async () => {
-  //   const data = await axios.get(
-  //     "https://e.mospolytech.ru/old/lk_api.php/?getStaff&search=&division=&page=50&perpage=50&token=encs7hdoQvvlRbnmdYMx6iYbN6BV4c0u3OFzrYnFLLnxMTZgPEFWacFk%2BbO2lmIVpB4FZl3gw4Gl4vqwmhv0ZozGywqMuZHzO9Dp7nzjoCq3RxTWE0Lh58dVG%2FAoV9M13ElJ6AUayD%2B9Vw41XTcwOFhTEtm5OaGaCnVtzkeGR28%3D"
-  //   );
-  //   return response.data;
-  // };
 
-  // useEffect(() => {
-  //   console.log(getStaff());
-  // });
   interface DataType {
-    key: string;
+    country: string;
     name: string;
-    age: number;
-    address: string;
-    email: string;
-    username: string;
-  }
+    school: string;
+  };
 
-  const dataSource: DataType[] = [
-    {
-      key: '1',
-      name: 'Mike',
-      age: 32,
-      address: '10 Downing Street',
-      email: 'mike@mail.ru',
-      username: 'MegaGigsDragonSlayer69',
-    },
-    {
-      key: '2',
-      name: 'John',
-      age: 42,
-      address: '10 Downing Street',
-      email: 'jhon@mail.ru',
-      username: 'MegaGigsDragonSlayer70',
-    },
-    {
-      key: '2',
-      name: 'Don',
-      age: 42,
-      address: '10 Downing Street',
-      email: 'djero@mail.ru',
-      username: 'MegaGigsDragonSlayer71',
-    },
-    {
-      key: '2',
-      name: 'Bob',
-      age: 42,
-      address: '10 Downing Street',
-      email: 'adww@mail.ru',
-      username: 'MegaGigsDragonSlayer72',
-    },
-  ];
-  
   const columns: ColumnsType<DataType> = [
     {
-      title: 'Name',
+      title: 'Страна',
+      dataIndex: 'country',
+      key: 'country',
+    },
+    {
+      title: 'Название школы',
       dataIndex: 'name',
       key: 'name',
     },
     {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age',
+      title: 'Сайт школы',
+      dataIndex: 'web_pages',
+      key: 'school',
     },
-    {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
-    },
-    {
-      title: 'Email',
-      dataIndex: 'email',
-      key: 'email',
-    },
-    {
-      title: 'Username',
-      dataIndex: 'username',
-      key: 'username',
-    }
+    
   ];
-  
-  
+
+  const limit: number = 10;
+  const [page, setPage] = useState<number>(1);
+  const [offset, setOffset] = useState<number>(1);
+  const [dataSource, setDataSource] = useState<DataType[]>();
+
+  const getUniversity = async (page: number, limit: number, offset: number) => {
+    const response = await axios.get(`http://universities.hipolabs.com/search?offset=${offset}&limit=${limit}`)
+    setDataSource(response.data);    
+  }
+
+  useEffect(() => {
+    getUniversity(page, limit, offset)
+  })
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <Table dataSource={dataSource} columns={columns} />
-      </header>
-    </div>
-  );
+    <>
+      <Table dataSource={dataSource} columns={columns} pagination={false}/>
+      <div className="pagination">
+        <Button onClick={() => {setPage(page - 1); setOffset(offset - 10)}} disabled={offset === 1}>Назад</Button>
+        <p className="pagination__page">{page}</p>
+        <Button onClick={() => {setPage(page + 1); setOffset(offset + 10)}}>Вперед</Button>
+      </div>
+    </>
+  )
 }
 
 export default App;
