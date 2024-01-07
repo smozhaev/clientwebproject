@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 
 export interface StyledFooterProps {
@@ -12,9 +12,13 @@ const Footer = () => {
     align-items: center;
     width: 100%;
     min-height: 100px;
+    max-height: 100px;
     height: 100%;
-    background-color: ${({ FooterColor }) =>
-      FooterColor ? FooterColor : "#000000"};
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: none;
+    /* ${({ FooterColor }) => (FooterColor ? FooterColor : "#f8f9fa")}; */
     color: white;
   `;
 
@@ -30,15 +34,17 @@ const Footer = () => {
     height: 100%;
   `;
 
-  const GlobalFooterStyles = createGlobalStyle`
-    li [data-theme=light]{
-      
-    }
-  `;
+  // const FooterTheme = () => {
+  //   let theme = "";
+  //   document.documentElement.getAttribute("data-theme") === "dark"
+  //     ? (theme = "#343a40")
+  //     : (theme = "#e4e4e4");
+  //   return theme;
+  // };
 
   return (
     <>
-      <FooterContainer FooterColor="#343a40">
+      <FooterContainer>
         <NavContainer>
           <li>telegram</li>
           <li>instagram</li>
