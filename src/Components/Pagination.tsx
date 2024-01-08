@@ -65,7 +65,8 @@ const PaginationPage = () => {
   `;
 
   const StyledButton = styled(Button)`
-    background-color: none;
+    background-color: var(--theme-pagination-button);
+    color: var(--theme-text);
   `;
 
   const limit: number = 10;
@@ -73,7 +74,7 @@ const PaginationPage = () => {
   const offset: number = (page - 1) * limit;
   const [dataSource, setDataSource] = useState<DataType[]>();
 
-  const getUniversity = async (page: number, limit: number, offset: number) => {
+  const getUniversity = async (limit: number, offset: number) => {
     const response = await axios.get(
       `http://universities.hipolabs.com/search?offset=${offset}&limit=${limit}`
     );
@@ -81,8 +82,8 @@ const PaginationPage = () => {
   };
 
   useEffect(() => {
-    getUniversity(page, limit, offset);
-  });
+    getUniversity(limit, offset);
+  }, [offset]);
 
   return (
     <TableContainer>
@@ -100,7 +101,9 @@ const PaginationPage = () => {
           Назад
         </StyledButton>
         <p className="pagination__page">{page}</p>
-        <Button onClick={() => setPage((page) => page + 1)}>Вперед</Button>
+        <StyledButton onClick={() => setPage((page) => page + 1)}>
+          Вперед
+        </StyledButton>
       </PaginateContainer>
     </TableContainer>
   );

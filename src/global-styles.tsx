@@ -13,11 +13,15 @@ const GlobalStyles = createGlobalStyle`
     html[data-theme=light] {
         --theme: white;
         --theme-text: black;
+        --theme-footer: #f4f4f4;
+
     }
 
     html[data-theme=dark] {
-        --theme: black;
+        --theme: #1c1b1b;
         --theme-text: white;
+        --theme-footer: #343a40;
+        --theme-pagination-button: #343a40;
     }
     
     h2 {

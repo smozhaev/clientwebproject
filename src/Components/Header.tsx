@@ -8,6 +8,7 @@ import Login from "./Login";
 import Registr from "./Registr";
 import { useState } from "react";
 import { Switch } from "antd";
+import styled from "styled-components";
 
 interface HeaderComponentProps {
   isAuth: boolean;
@@ -44,10 +45,16 @@ const Header: React.FC<HeaderComponentProps> = ({ isAuth, setIsAuth }) => {
       >
         <Container>
           <Navbar.Brand href="#home">AllUniversities</Navbar.Brand>
+
           <Nav className="me-auto">
             <Nav.Link href="/">Главная</Nav.Link>
             <Nav.Link href="/features">О нас</Nav.Link>
             <Nav.Link href="/pricing">Оставте заявку</Nav.Link>
+            <Switch
+              onClick={() => changeTheme()}
+              defaultChecked
+              onChange={onChange}
+            />
             <ButtonGroup aria-label="Basic example">
               {isAuth ? (
                 <Button onClick={notAuthState} variant="secondary">
@@ -64,11 +71,6 @@ const Header: React.FC<HeaderComponentProps> = ({ isAuth, setIsAuth }) => {
                 <Button variant="secondary">Регистрация</Button>
               )}
             </ButtonGroup>
-            <Switch
-              onClick={() => changeTheme()}
-              defaultChecked
-              onChange={onChange}
-            />
           </Nav>
         </Container>
       </Navbar>

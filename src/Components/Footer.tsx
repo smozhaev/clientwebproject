@@ -17,9 +17,8 @@ const Footer = () => {
     position: absolute;
     left: 0;
     bottom: 0;
-    background-color: none;
-    /* ${({ FooterColor }) => (FooterColor ? FooterColor : "#f8f9fa")}; */
-    color: white;
+    background-color: var(--theme-footer);
+    color: var(--theme-text);
   `;
 
   const NavContainer = styled.ul<StyledFooterProps>`
@@ -33,14 +32,6 @@ const Footer = () => {
     min-height: 100px;
     height: 100%;
   `;
-
-  // const FooterTheme = () => {
-  //   let theme = "";
-  //   document.documentElement.getAttribute("data-theme") === "dark"
-  //     ? (theme = "#343a40")
-  //     : (theme = "#e4e4e4");
-  //   return theme;
-  // };
 
   return (
     <>
