@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import "../App.css";
-import { Table, Button, Pagination } from "antd";
+import { useEffect, useState } from "react";
+import "../../App.css";
+import { Table, Button } from "antd";
 import { ColumnsType } from "antd/es/table";
 import axios from "axios";
-import styled, { createGlobalStyle } from "styled-components";
+import styled from "styled-components";
 
 export interface StyledPaginationProps {
   ThemeColor?: string;
