@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 
 export interface StyledFooterProps {
@@ -12,10 +12,13 @@ const Footer = () => {
     align-items: center;
     width: 100%;
     min-height: 100px;
+    max-height: 100px;
     height: 100%;
-    background-color: ${({ FooterColor }) =>
-      FooterColor ? FooterColor : "#000000"};
-    color: white;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: var(--theme-footer);
+    color: var(--theme-text);
   `;
 
   const NavContainer = styled.ul<StyledFooterProps>`
@@ -30,15 +33,9 @@ const Footer = () => {
     height: 100%;
   `;
 
-  const GlobalFooterStyles = createGlobalStyle`
-    li [data-theme=light]{
-      
-    }
-  `;
-
   return (
     <>
-      <FooterContainer FooterColor="#343a40">
+      <FooterContainer>
         <NavContainer>
           <li>telegram</li>
           <li>instagram</li>
