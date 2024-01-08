@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Header from "./Components/Header";
+import Header from "./Components/Header/index";
 import MainRouter from "./Components/MainRouter";
 import Footer from "./Components/Footer";
 

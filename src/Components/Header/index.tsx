@@ -1,14 +1,9 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import Button from "react-bootstrap/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import { Navigate, RouteObject, useRoutes, Link } from "react-router-dom";
-import Login from "./Login";
-import Registr from "./Registr";
+import AuthButtons from "./AuthButtons";
+import ThemeButton from "./ThemeButton";
 import { useState } from "react";
-import { Switch } from "antd";
-import styled from "styled-components";
 
 interface HeaderComponentProps {
   isAuth: boolean;
@@ -22,10 +17,6 @@ const Header: React.FC<HeaderComponentProps> = ({ isAuth, setIsAuth }) => {
 
   const notAuthState = () => {
     setIsAuth(false);
-  };
-
-  const onChange = (checked: boolean) => {
-    console.log(`switch to ${checked}`);
   };
 
   const [currentTheme, setCurrentTheme] = useState<"dark" | "light">("light");
@@ -50,27 +41,12 @@ const Header: React.FC<HeaderComponentProps> = ({ isAuth, setIsAuth }) => {
             <Nav.Link href="/">Главная</Nav.Link>
             <Nav.Link href="/features">О нас</Nav.Link>
             <Nav.Link href="/pricing">Оставте заявку</Nav.Link>
-            <Switch
-              onClick={() => changeTheme()}
-              defaultChecked
-              onChange={onChange}
+            <ThemeButton changeTheme={changeTheme} />
+            <AuthButtons
+              notAuthState={notAuthState}
+              AuthState={AuthState}
+              isAuth={isAuth}
             />
-            <ButtonGroup aria-label="Basic example">
-              {isAuth ? (
-                <Button onClick={notAuthState} variant="secondary">
-                  Выход
-                </Button>
-              ) : (
-                <Button onClick={AuthState} variant="secondary">
-                  Вход
-                </Button>
-              )}
-              {isAuth ? (
-                <></>
-              ) : (
-                <Button variant="secondary">Регистрация</Button>
-              )}
-            </ButtonGroup>
           </Nav>
         </Container>
       </Navbar>
