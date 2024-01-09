@@ -4,6 +4,7 @@ import { Table, Button } from "antd";
 import { ColumnsType } from "antd/es/table";
 import axios from "axios";
 import styled from "styled-components";
+import Form from "../Form";
 
 export interface StyledPaginationProps {
   ThemeColor?: string;
@@ -87,6 +88,7 @@ const PaginationPage = () => {
 
   return (
     <TableContainer>
+      <Form />
       <h2>Список университетов</h2>
       <StyledTable
         dataSource={dataSource}
